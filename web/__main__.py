@@ -35,6 +35,7 @@ async def refresh() :
     for i in tToday :
         x = Country(i)
         WList.insert_one(x._dict())
+    print("[+] Done Refresh")
 
 async def reset_db(db, client):
     await client.drop_database(db)

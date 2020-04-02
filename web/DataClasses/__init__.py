@@ -23,7 +23,6 @@ class Country :
     int sCrit           Serious / Critical
     float tCm           Total Cases/M
     float tDm           Total Deaths/M
-    string fCase        First Case Date
     '''
 
     def __init__(self,C=None) :
@@ -38,7 +37,6 @@ class Country :
             self.sCrit = 0
             self.tCm = 0.0
             self.tDm = 0.0
-            self.fCase = "Jan 00"
         elif type(C) is list :
             self.cName = C[0]
             self.tCases = Numeric(C[1])
@@ -50,10 +48,6 @@ class Country :
             self.sCrit = Numeric(C[7])
             self.tCm = float(Numeric(C[8]))
             self.tDm = float(Numeric(C[9]))
-            try :
-                self.fCase = C[10].split('\n')[1]
-            except :
-                self.fCase = C[10]
         elif type(C) is dict :
             self.cName = C['CountryName']
             self.tCases = Numeric(C['TotalCases'])
@@ -65,10 +59,6 @@ class Country :
             self.sCrit = Numeric(C['SeriousCritical'])
             self.tCm = float(Numeric(C['CasesPM']))
             self.tDm = float(Numeric(C['DeathPM']))
-            try :
-                self.fCase = C['FirstCase'].split('\n')[1]
-            except :
-                self.fCase = C['FirstCase']
     
     def _dict(self) :
         return {
@@ -81,6 +71,5 @@ class Country :
             'ActiveCases':self.aCases,
             'SeriousCritical':self.sCrit,
             'CasesPM':self.tCm,
-            'DeathPM':self.tDm,
-            'FirstCase':self.fCase
+            'DeathPM':self.tDm
         }
