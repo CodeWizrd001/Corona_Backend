@@ -4,6 +4,7 @@ import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from .DataClasses import Country
+from .Utils import *
 
 from . import *
 
@@ -36,9 +37,10 @@ async def handleResp(request) :
     c = WList.find({"CountryName":{"$gt":''}})
     c = await c.to_list(length=100000)
     c = await Listify(c)
+    c = sorted(c,key = lambda i: i['ActiveCases'],reverse=True)
     return json({'data':c})
 
-@bp.route('/get',methods=['POST'])
+@bp.route('/get',methods=['GET','POST'])
 async def Add(request) :
     print("Request Received") 
     print(request)
@@ -47,11 +49,12 @@ async def Add(request) :
     print("Body :",a,b) 
 
     n = a['cName']
-    n.capitalize()
+    n = n.capitalize()
     n = '^'+n
     z = WList.find({'CountryName':{'$regex':n}})
     z = await z.to_list(length=10000)
 
     y = await Listify(z)
-
+    y = sorted(y,key = lambda i: i['CountryName'])
+    print(y)
     return json({'data':y})

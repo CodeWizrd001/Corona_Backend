@@ -130,6 +130,5 @@ if __name__ == '__main__' :
 
     mainT.start()
     while clear :
-        print(clear)
         time.sleep(2)
     refT.start() 

@@ -1,3 +1,5 @@
+from functools import wraps
+
 client_id = "818861716713-g68oa4jvgdhhf9omtc4cjpdimil8jjas.apps.googleusercontent.com"
 client_secret = "IaEK5i3mWfJuS-By0-Qy5mXp"
 
@@ -32,3 +34,12 @@ def Numeric(x) :
         x = float(x)
 
     return x 
+
+async def check_logged_in(user) :
+    async def check_logged(func) :
+        @wraps(func)
+        async def check(*args,**kwargs) :
+            print(func.__name__,user,type(user))
+            return await func(args,kwargs)
+        return check
+    return check_logged
