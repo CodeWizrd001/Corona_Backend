@@ -38,7 +38,11 @@ async def handleResp(request) :
     c = await c.to_list(length=100000)
     c = await Listify(c)
     c = sorted(c,key = lambda i: i['ActiveCases'],reverse=True)
-    return json({'data':c})
+    d = sorted(c,key = lambda i: i['CasesPM'],reverse=False)
+    e = sorted(c,key = lambda i: i['CasesPM'],reverse=True)
+    print("Length",len(c))
+    print(e[10])
+    return json({'data':c,'min':float(d[0]['CasesPM']),'max':float(e[10]['CasesPM'])})
 
 @bp.route('/get',methods=['GET','POST'])
 async def Add(request) :
@@ -56,5 +60,4 @@ async def Add(request) :
 
     y = await Listify(z)
     y = sorted(y,key = lambda i: i['CountryName'])
-    print(y)
     return json({'data':y})
