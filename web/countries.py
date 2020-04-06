@@ -62,4 +62,4 @@ async def Add(request) :
 
     y = await Listify(z)
     y = sorted(y,key = lambda i: i['CountryName'])
-    return json({'data':y,'min':1,'max':1})
+    return json({'data':y,'min':1.0,'max':1.0})
