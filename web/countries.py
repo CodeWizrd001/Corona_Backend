@@ -48,9 +48,11 @@ async def handleResp(request) :
 async def Add(request) :
     print("Request Received") 
     print(request)
-    a = request.json
+    a = request.body
     b = type(a)
     print("Body :",a,b) 
+    a = request.json
+    b = type(a)
 
     n = a['cName']
     n = n.capitalize()
@@ -60,4 +62,4 @@ async def Add(request) :
 
     y = await Listify(z)
     y = sorted(y,key = lambda i: i['CountryName'])
-    return json({'data':y})
+    return json({'data':y,'min':1,'max':1})
