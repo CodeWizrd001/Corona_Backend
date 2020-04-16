@@ -22,7 +22,7 @@ async def refresh() :
     global WList
 
     a = br.open("https://www.worldometers.info/coronavirus/")
-    b = ['<table'+i for i in a.get_data().decode().split('<table')][1:3]
+    b = ['<table'+i for i in a.get_data().decode().split('<table')][1:]
     b_ = [i.split('</table>')[0]+'</table>' for i in b]
     extT,extY = map(Extractor,b_)
     extT.parse()
