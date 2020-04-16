@@ -18,11 +18,11 @@ def hash(s) :
     return s 
 
 def Numeric(x) :
-    if x == '' or x == ' ' or 'N/A' in x:
-        return 0
-
     if type(x) is int or type(x) is float :
         return x 
+
+    if x == '' or x == ' ' or 'N/A' in x:
+        return 0
 
     y = list(x) 
     while ',' in y :
